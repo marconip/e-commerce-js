@@ -1,0 +1,16 @@
+colocar tudo em ingles
+
+colocar 6 produtos na loja
+
+inserir style apagado e desabilitar na escolha fretegratis, quando nao esta gratis
+
+excluir/hide frete do resumo, quando perder f.gratis
+
+quando o cep ainda nao ta gratis, e escolho o tipo, depois o frete passa a ser gratis-auto, o valor não reseta
+
+quando o frete ja ta gratis, e acrescenta valor da erro, mostra valor com menos -70,00
+
+não usar o loop 2x
+tiposFrete.forEach(function (cadaFrete) {
+
+PONTO NO VALOR MAIOR QUE MIL

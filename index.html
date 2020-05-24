@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="css/style.min.css">
+
+    <title>E-commerce JS</title>
+</head>
+
+<body>
+    <section class="loja">
+        <div class="loja-titulo">
+            <i class="icone-cart"></i>
+            <h2> Loja</h2>
+            <i class="icone-arrow rotacao"></i>
+        </div>
+        <div class="loja-produtos show">
+            <div class="product" data-target="1">
+                <img src="img/misery.jpg" alt="Misery">
+                <h3>Misery</h3>
+                <p>R$ <span>20,00</span></p>
+                <button type="button" class="btn btn-buy"><i class="icone-cart"></i> Comprar</button>
+            </div>
+            <div class="product" data-target="2">
+                <img src="img/sapiens.jpg" alt="Sapiens">
+                <h3>Sapiens</h3>
+                <p>R$ <span>40,00</span></p>
+                <button type="button" class="btn btn-buy"><i class="icone-cart"></i> Comprar</button>
+            </div>
+            <div class="product" data-target="3">
+                <img src="img/spider-man.jpg" alt="Spider-man">
+                <h3>The Amazing Spider-man</h3>
+                <p>R$ <span>10,00</span></p>
+                <button type="button" class="btn btn-buy"><i class="icone-cart"></i> Comprar</button>
+            </div>
+            <div class="product" data-target="4">
+                <img src="img/avangers-vs-xmen.jpg" alt="Avangers vs X-men">
+                <h3>Avangers vs X-men</h3>
+                <p>R$ <span>190,0</span>0</p>
+                <button type="button" class="btn btn-buy"><i class="icone-cart"></i> Comprar</button>
+            </div>
+            <div class="product" data-target="5">
+                <img src="img/conan.jpg" alt="Conan">
+                <h3>Conan</h3>
+                <p>R$ <span>100,00</span></p>
+                <button type="button" class="btn btn-buy"><i class="icone-cart"></i> Comprar</button>
+            </div>
+        </div>
+    </section>
+
+    <section class="cart d-none">
+        <h2>Shopping Cart</h2>
+        <div class="cart-items">
+            <div class="bag">
+                <div class="titles">
+                    <h4>Product</h4>
+                    <h4>Price</h4>
+                </div>
+                <!--MODELO ESPELHO 
+                <div class="items">
+                    <img src="img/spider-man.jpg" alt="Misery">
+                    <div class="items-info">
+                        <h3>The Amazing Spider-man</h3>
+                        <input type="number" name="quantity" pattern="[0-9]*" inputmode="numeric">
+                        <a href="javascript:void(0)" class="excluir">Excluir</a>
+                    </div>
+                    <p class="items-price">R$ <span>45,50</span></p>
+                </div> -->
+            </div>
+
+            <div class="values">
+                <div class="shipping">
+                    <p class="shipping-info">Free shipping on purchases over R$ <span>50,00</span></p>
+                    <p class="shipping-add">For free shipping add R$ <span></span></p>
+                    <p class="shipping-free d-none">Your orders are free shipping</p>
+                </div>
+                <div class="zipcode">
+                    <input type="text" name="zipcode" pattern="[0-9]*" inputmode="numeric">
+                    <button type="button" class="btn btn-ok"> OK </button>
+                    <a href="javascript:void(0)">Não sei meu CEP</a>
+                </div>
+                <div class="zipcode-choices hide">
+                    <label class="radios"> Sedex - 14 dias
+                        <input type="radio" name="radio" value="10,00" class="sedex">
+                        <span class="checkmark"></span>
+                        <div class="zipcode-price">R$ 10,00</div>
+                    </label>
+                    <label class="radios">PAC - 7 dias
+                        <input type="radio" name="radio" value="15,90" class="pac">
+                        <span class="checkmark"></span>
+                        <div class="zipcode-price">R$ 15,90</div>
+                    </label>
+                    <label class="radios">Free - 5 dias
+                        <input type="radio" name="radio" value="0,00" class="free">
+                        <span class="checkmark"></span>
+                        <div class="zipcode-price">R$ 0,00</div>
+                    </label>
+                </div>
+                <div class="zipcode-numbers hide">
+                    <p><span>Home</span> <span>93093-093</span></p>
+                    <p><span>Work</span> <span>83083-083</span></p>
+                    <p><span>Mom's house</span> <span>73073-073</span></p>
+                </div>
+
+                <div class="resume">
+                    <h2>Resume total</h2>
+                    <p>
+                        <span class="resumo-itens"> </span> <span class="resume-value">R$ <span> </span></span>
+                    </p>
+                    <p class="resume-shipping d-none">
+                        <span>Frete </span> <span class="resume-cep">R$ <span>0,00 </span></span>
+                    </p>
+                    <p>
+                        <strong>Total</strong> <strong class="resume-total"> </strong>
+                    </p>
+                    <button type="button" class="btn btn-ok"> Finalizar compra </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="modal" style="display: none;">
+        <div class="modal-main">
+            <div class="modal-body">
+                <h2>Finalizar a compra<br />
+                    irá reiniciar a página</h2>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn"> Finalizar </button>
+                <button type="button" class="btn btn-line"> Voltar </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="js/main.js"></script>
+</body>
+
+</html>
