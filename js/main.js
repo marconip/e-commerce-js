@@ -77,7 +77,6 @@ var cepBotao = document.querySelector(".zipcode button");
 var cepNaoSei = document.querySelector(".zipcode a");
 var cepEscolhas = document.querySelector(".zipcode-choices");
 var cepNumeros = document.querySelector(".zipcode-numbers");
-
 //click no botão "OK" do frete
 cepBotao.onclick = function () {
     if (cepInput.value == "73073-073" || cepInput.value == "83083-083" || cepInput.value == "93093-093") {
@@ -100,17 +99,18 @@ cepNaoSei.onclick = function () {
     }
 };
 
+
 //Remover itens do carrinho
 function excluir() {
     var excluir = document.querySelectorAll(".excluir");
-    var produtoLista = document.querySelectorAll(".product");
 
     excluir.forEach(function (est) {
         est.onclick = function () {
             var produtoTodo = est.parentElement.parentElement;
 
-            produtoLista[produtoTodo.dataset.target-1].classList.remove("selected");
-            produtoLista[produtoTodo.dataset.target-1].children[3].removeAttribute("disabled");
+            var listaProdLoja = document.querySelector(".product[data-target='" + produtoTodo.dataset.target + "']");
+            listaProdLoja.classList.remove("selected");
+            listaProdLoja.children[3].removeAttribute("disabled");
 
             produtoTodo.remove();
 
@@ -123,13 +123,14 @@ function excluir() {
     })
 };
 
-//SOMA dos itens total dentro do Carrinho
+
+//SOMA dos itens total dentro do Carrinho (click no input de quantidade)
 function inputQdt(input) {
     var valorItensTotal = 0;
     var qtd = input;//input quantidade
-    var valor = input.parentElement.nextElementSibling;//div pai span valor
+    var valor = input.parentElement.nextElementSibling;//div pai span valor (preço do produto)
 
-    valorItensTotal += (parseFloat(valor.dataset.price) * parseInt(qtd.value));
+    valorItensTotal += (parseFloat(valor.dataset.price.replace(",", ".")) * parseInt(qtd.value));//parseFloat: pega 1ponto de dezena - parseInt: numeros inteiros sem fração
 
     input.parentElement.nextElementSibling.children[0].innerHTML = valorItensTotal.toFixed(2).toString().replace(".", ",");
 
@@ -141,26 +142,70 @@ function inputQdt(input) {
 };
 
 
+//opcoes de frete, click nos radios buttons
+var cepValores = document.querySelectorAll(".zipcode-choices input");
+cepValores.forEach(function (cepV) {
+    cepV.onclick = function () {
+        resumoTotal();
+    }
+});
+
+
 //Resumo total dos itens
 function resumoTotal() {
     var valorResumo = 0;
     var items = document.querySelectorAll(".items");
     items.forEach(function (item) {
-        var valor = item.children[2].children[0];//span valor
-        valorResumo += (parseFloat(valor.innerHTML));
-
-        document.querySelector(".resume-value span").innerHTML = valorResumo.toFixed(2).toString().replace(".", ",");
-        document.querySelector(".resume-total").innerHTML = valorResumo.toFixed(2).toString().replace(".", ",");
-
-        //Soma total valor de itens + frete    /////////////        
+        var valor = item.children[2].children[0];//span valor (preço do produto)
         var valorTodosItens = document.querySelector(".resume-value span");
         var valorTotalFrete = document.querySelector(".resume-cep span");
         var valorFreteApartir = document.querySelector(".shipping-info span");
         var resumoFrete = document.querySelector(".resume-shipping");
+        var txtFreteAdd = document.querySelector(".shipping-add");
+        var txtFreteFree = document.querySelector(".shipping-free");
+        var FreteFreeRadio = document.querySelector(".zipcode-free");
+        var tiposFrete = document.querySelectorAll(".zipcode-choices .radios");
+
+        valorResumo += (parseFloat(valor.innerHTML.replace(",", ".")));
+        document.querySelector(".resume-value span").innerHTML = valorResumo.toFixed(2).toString().replace(".", ",");
+        document.querySelector(".resume-total").innerHTML = valorResumo.toFixed(2).toString().replace(".", ",");
+
+        //texto para frete grátis       
+        var paraGratis = 0;
+        //obs.: 'parseFloat' converte uma string em valores numericos
+        if (parseFloat(valorTodosItens.innerHTML.replace(",", ".")) >= parseFloat(valorFreteApartir.innerHTML.replace(",", "."))) {
+            txtFreteAdd.classList.add("d-none");//remove texto valor faltante
+            resumoFrete.classList.add("autoselecionado");//coloca cor verde Resumo Total do frete 
+            resumoFrete.classList.remove("d-none");//mostra no Resumo Total o valor frete
+            txtFreteFree.classList.remove("d-none");//mostra texto ganhou frete grátis
+            FreteFreeRadio.classList.remove("d-none");//mostra radio button frete gratis selecionado
+            tiposFrete.forEach(function (cadaFrete) {//TODAS AS ESCOLHAS DE FRETE
+                cadaFrete.classList.add("desabilitado");//coloca cor cinza opções frete (meio agado) 
+                cadaFrete.children[0].setAttribute("disabled", "disabled");//desabilita opções de frete pago (radios button)
+            });
+            tiposFrete[2].classList.add("autoselecionado");//Escolha frete gratis, coloca cor verde
+            tiposFrete[2].children[0].checked = true;//Escolha frete gratis, seleciona radio button
+            valorTotalFrete.innerHTML = "0,00";//Resumo total, reescreve o frete valor = 0
+        } else {
+            txtFreteAdd.classList.remove("d-none");
+            resumoFrete.classList.remove("autoselecionado");
+            resumoFrete.classList.add("d-none");
+            txtFreteFree.classList.add("d-none");
+            FreteFreeRadio.classList.add("d-none");
+            tiposFrete.forEach(function (cadaFrete) {
+                cadaFrete.classList.remove("desabilitado");
+                cadaFrete.children[0].removeAttribute("disabled");
+            });
+            tiposFrete[2].classList.remove("autoselecionado");
+            tiposFrete[2].children[0].checked = false;
+        }
+        paraGratis += (parseFloat(valorFreteApartir.innerHTML.replace(",", ".")) - parseFloat(valorTodosItens.innerHTML.replace(",", ".")));
+        document.querySelector(".shipping-add span").innerHTML = paraGratis.toFixed(2).toString().replace(".", ",");
 
         //soma valores total
         var cepSelecionado = document.querySelector(".radios input:checked");
 
+        //Após o click nos radios buttons
         if (cepSelecionado != null || cepSelecionado != undefined) {
             var valorTotal = 0;
             resumoFrete.classList.remove("d-none");
@@ -171,55 +216,13 @@ function resumoTotal() {
             document.querySelector(".resume-total").innerHTML = "R$ " + valorTotal.toFixed(2).toString().replace(".", ",");
         };
 
-
-        //texto para frete grátis
-        var txtFreteAdd = document.querySelector(".shipping-add");
-        var txtFreteFree = document.querySelector(".shipping-free");
-        var tiposFrete = document.querySelectorAll(".zipcode-choices .radios");
-        var paraGratis = 0;
-        paraGratis += (parseFloat(valorFreteApartir.innerHTML.replace(",", ".")) - parseFloat(valorTodosItens.innerHTML.replace(",", ".")));
-
-        if (valorTodosItens.innerHTML >= valorFreteApartir.innerHTML) {
-            txtFreteAdd.classList.add("d-none");
-            txtFreteFree.classList.remove("d-none");
-            resumoFrete.classList.remove("d-none");
-            resumoFrete.classList.add("autoselecionado");
-            tiposFrete.forEach(function (cadaFrete) {
-                cadaFrete.classList.add("desabilitado");
-                cadaFrete.children[0].setAttribute("disabled", "disabled");
-            });
-            tiposFrete[2].classList.remove("desabilitado");
-            tiposFrete[2].classList.add("autoselecionado");
-            tiposFrete[2].children[0].checked = true;
-        } else {
-            resumoFrete.classList.remove("autoselecionado");
-            txtFreteAdd.classList.remove("d-none");
-            txtFreteFree.classList.add("d-none");
-            tiposFrete[2].classList.remove("autoselecionado");
-            tiposFrete[2].children[0].checked = false;
-            tiposFrete.forEach(function (cadaFrete) {
-                cadaFrete.classList.remove("desabilitado");
-                cadaFrete.children[0].removeAttribute("disabled");
-            });
-        }
-        document.querySelector(".shipping-add span").innerHTML = paraGratis.toFixed(2).toString().replace(".", ",");
-
-
-        ////itens total por input
+        //itens total por input quantidade
         var inputItens = document.querySelectorAll(".items input");
-        itensvalorTotal = 0;
+        qtdItensValorTotal = 0;
         inputItens.forEach(function (inputItens) {
-            itensvalorTotal += parseInt(inputItens.value);
+            qtdItensValorTotal += parseInt(inputItens.value);
         });
-        document.querySelector(".resumo-itens").innerHTML = itensvalorTotal + (itensvalorTotal == 1 ? " item" : " items");
+        document.querySelector(".resumo-itens").innerHTML = qtdItensValorTotal + (qtdItensValorTotal == 1 ? " item" : " items");
 
     });
 };
-
-//opcoes de frete
-var cepValores = document.querySelectorAll(".zipcode-choices input");
-cepValores.forEach(function (cepV) {
-    cepV.onclick = function () {
-        resumoTotal();
-    }
-});

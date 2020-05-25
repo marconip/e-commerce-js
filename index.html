@@ -14,39 +14,45 @@
     <section class="loja">
         <div class="loja-titulo">
             <i class="icone-cart"></i>
-            <h2> Loja</h2>
+            <h2> Store</h2>
             <i class="icone-arrow rotacao"></i>
         </div>
         <div class="loja-produtos show">
-            <div class="product" data-target="1">
+            <div class="product" data-target="senhor-aneis">
+                <img src="img/senhor-aneis.jpg" alt="Lord of the Rigns">
+                <h3>Lord of the Rigns</h3>
+                <p>R$ <span>50,00</span></p>
+                <button type="button" class="btn btn-buy"><i class="icone-cart"></i> Buy</button>
+            </div>
+            <div class="product" data-target="misery">
                 <img src="img/misery.jpg" alt="Misery">
                 <h3>Misery</h3>
-                <p>R$ <span>20,00</span></p>
-                <button type="button" class="btn btn-buy"><i class="icone-cart"></i> Comprar</button>
+                <p>R$ <span>30,90</span></p>
+                <button type="button" class="btn btn-buy"><i class="icone-cart"></i> Buy</button>
             </div>
-            <div class="product" data-target="2">
+            <div class="product" data-target="sapiens">
                 <img src="img/sapiens.jpg" alt="Sapiens">
                 <h3>Sapiens</h3>
-                <p>R$ <span>40,00</span></p>
-                <button type="button" class="btn btn-buy"><i class="icone-cart"></i> Comprar</button>
+                <p>R$ <span>40,99</span></p>
+                <button type="button" class="btn btn-buy"><i class="icone-cart"></i> Buy</button>
             </div>
-            <div class="product" data-target="3">
+            <div class="product" data-target="spider-man">
                 <img src="img/spider-man.jpg" alt="Spider-man">
                 <h3>The Amazing Spider-man</h3>
-                <p>R$ <span>10,00</span></p>
-                <button type="button" class="btn btn-buy"><i class="icone-cart"></i> Comprar</button>
+                <p>R$ <span>20,00</span></p>
+                <button type="button" class="btn btn-buy"><i class="icone-cart"></i> Buy</button>
             </div>
-            <div class="product" data-target="4">
+            <div class="product" data-target="avangers-vs-xmen">
                 <img src="img/avangers-vs-xmen.jpg" alt="Avangers vs X-men">
                 <h3>Avangers vs X-men</h3>
-                <p>R$ <span>190,0</span>0</p>
-                <button type="button" class="btn btn-buy"><i class="icone-cart"></i> Comprar</button>
+                <p>R$ <span>100,9</span>0</p>
+                <button type="button" class="btn btn-buy"><i class="icone-cart"></i> Buy</button>
             </div>
-            <div class="product" data-target="5">
+            <div class="product" data-target="conan">
                 <img src="img/conan.jpg" alt="Conan">
                 <h3>Conan</h3>
-                <p>R$ <span>100,00</span></p>
-                <button type="button" class="btn btn-buy"><i class="icone-cart"></i> Comprar</button>
+                <p>R$ <span>10,00</span></p>
+                <button type="button" class="btn btn-buy"><i class="icone-cart"></i> Buy</button>
             </div>
         </div>
     </section>
@@ -73,27 +79,27 @@
 
             <div class="values">
                 <div class="shipping">
-                    <p class="shipping-info">Free shipping on purchases over R$ <span>50,00</span></p>
+                    <p class="shipping-info">Free shipping on purchases over R$ <span>90,00</span></p>
                     <p class="shipping-add">For free shipping add R$ <span></span></p>
-                    <p class="shipping-free d-none">Your orders are free shipping</p>
+                    <p class="shipping-free d-none"><i class="icone-like"></i> Your orders are free shipping</p>
                 </div>
                 <div class="zipcode">
                     <input type="text" name="zipcode" pattern="[0-9]*" inputmode="numeric">
                     <button type="button" class="btn btn-ok"> OK </button>
-                    <a href="javascript:void(0)">Não sei meu CEP</a>
+                    <a href="javascript:void(0)">Don't know my zip code</a>
                 </div>
                 <div class="zipcode-choices hide">
-                    <label class="radios"> Sedex - 14 dias
+                    <label class="radios">Conventional - 14 days
                         <input type="radio" name="radio" value="10,00" class="sedex">
                         <span class="checkmark"></span>
                         <div class="zipcode-price">R$ 10,00</div>
                     </label>
-                    <label class="radios">PAC - 7 dias
+                    <label class="radios">Fast - 7 days
                         <input type="radio" name="radio" value="15,90" class="pac">
                         <span class="checkmark"></span>
                         <div class="zipcode-price">R$ 15,90</div>
                     </label>
-                    <label class="radios">Free - 5 dias
+                    <label class="radios zipcode-free d-none">Free - 5 days
                         <input type="radio" name="radio" value="0,00" class="free">
                         <span class="checkmark"></span>
                         <div class="zipcode-price">R$ 0,00</div>
@@ -106,17 +112,17 @@
                 </div>
 
                 <div class="resume">
-                    <h2>Resume total</h2>
+                    <h2>Total resume</h2>
                     <p>
                         <span class="resumo-itens"> </span> <span class="resume-value">R$ <span> </span></span>
                     </p>
                     <p class="resume-shipping d-none">
-                        <span>Frete </span> <span class="resume-cep">R$ <span>0,00 </span></span>
+                        <span>Frete </span> <span class="resume-cep">R$ <span></span></span>
                     </p>
                     <p>
                         <strong>Total</strong> <strong class="resume-total"> </strong>
                     </p>
-                    <button type="button" class="btn btn-ok"> Finalizar compra </button>
+                    <button type="button" class="btn btn-ok">Checkout</button>
                 </div>
             </div>
         </div>
@@ -125,12 +131,12 @@
     <div class="modal" style="display: none;">
         <div class="modal-main">
             <div class="modal-body">
-                <h2>Finalizar a compra<br />
-                    irá reiniciar a página</h2>
+                <h2>Checkout<br />
+                    will restart the page</h2>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn"> Finalizar </button>
-                <button type="button" class="btn btn-line"> Voltar </button>
+                <button type="button" class="btn"> Finish </button>
+                <button type="button" class="btn btn-line"> Back </button>
             </div>
         </div>
     </div>
