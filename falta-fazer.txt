@@ -1,3 +1,5 @@
+icone na aba do navegador
+
 fazer o btn = CHECKOUT com modal
 
 responsivo html
