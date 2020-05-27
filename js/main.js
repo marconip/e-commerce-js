@@ -37,6 +37,9 @@ produtos.forEach(function (el) {
         var titulo3 = document.createElement("h3");
         titulo3.innerHTML = boxProduto.children[1].innerHTML;
 
+        var txtQtd = document.createElement("p");
+        txtQtd.innerHTML = "Quantity";
+
         var inputQtd = document.createElement("input");
         inputQtd.type = "number";
         inputQtd.name = "quantity";
@@ -47,7 +50,7 @@ produtos.forEach(function (el) {
 
         var link = document.createElement("a");
         link.href = "javascript:void(0)";
-        link.innerHTML = "Excluir";
+        link.innerHTML = "Delete";
         link.classList = "excluir";
 
         var paragrafo = document.createElement("p");
@@ -60,6 +63,7 @@ produtos.forEach(function (el) {
         itens.appendChild(paragrafo);
 
         itensInf.appendChild(titulo3);
+        itensInf.appendChild(txtQtd);
         itensInf.appendChild(inputQtd);
         itensInf.appendChild(link);
 
@@ -77,7 +81,13 @@ var cepBotao = document.querySelector(".zipcode button");
 var cepNaoSei = document.querySelector(".zipcode a");
 var cepEscolhas = document.querySelector(".zipcode-choices");
 var cepNumeros = document.querySelector(".zipcode-numbers");
-//click no botão "OK" do frete
+
+cepInput.onkeyup = function (enter) {
+    if (enter.keyCode === 13) {
+        enter.preventDefault();
+        cepBotao.click();
+    }
+};
 cepBotao.onclick = function () {
     if (cepInput.value == "73073-073" || cepInput.value == "83083-083" || cepInput.value == "93093-093") {
         cep.classList.remove("erro");
@@ -116,6 +126,10 @@ function excluir() {
 
             if (document.querySelectorAll(".bag .items").length == 0) {
                 document.querySelector(".cart").classList.add("d-none");
+                cepInput.value = null;
+                cep.classList.remove("erro");
+                cepEscolhas.classList.add("hide");
+                cepNumeros.classList.add("hide");
             };
 
             resumoTotal();
@@ -143,9 +157,11 @@ function inputQdt(input) {
 
 
 //opcoes de frete, click nos radios buttons
+var tiposFreteTodos = document.querySelector(".zipcode-choices");
 var cepValores = document.querySelectorAll(".zipcode-choices input");
 cepValores.forEach(function (cepV) {
     cepV.onclick = function () {
+        tiposFreteTodos.classList.remove("erro");
         resumoTotal();
     }
 });
@@ -164,6 +180,7 @@ function resumoTotal() {
         var txtFreteAdd = document.querySelector(".shipping-add");
         var txtFreteFree = document.querySelector(".shipping-free");
         var FreteFreeRadio = document.querySelector(".zipcode-free");
+        var tiposFreteTodos = document.querySelector(".zipcode-choices");
         var tiposFrete = document.querySelectorAll(".zipcode-choices .radios");
 
         valorResumo += (parseFloat(valor.innerHTML.replace(",", ".")));
@@ -185,6 +202,7 @@ function resumoTotal() {
             });
             tiposFrete[2].classList.add("autoselecionado");//Escolha frete gratis, coloca cor verde
             tiposFrete[2].children[0].checked = true;//Escolha frete gratis, seleciona radio button
+            tiposFreteTodos.classList.remove("erro");//remove cores vermelhas
             valorTotalFrete.innerHTML = "0,00";//Resumo total, reescreve o frete valor = 0
         } else {
             txtFreteAdd.classList.remove("d-none");
@@ -226,3 +244,29 @@ function resumoTotal() {
 
     });
 };
+
+
+//botão final Check Out
+var btnCheckout = document.querySelector(".btn-checkout");
+var resumoFrete = document.querySelector(".resume-shipping");
+var modal = document.querySelector(".modal");
+
+btnCheckout.onclick = function () {
+    if (resumoFrete.classList.contains("d-none")) {
+        cepEscolhas.classList.remove("hide");
+        cepEscolhas.classList.add("erro");
+    } else {
+        modal.classList.remove("d-none");
+    }
+}
+
+
+//mascara cep
+function mascara(t, mask) {
+    var i = t.value.length;
+    var saida = mask.substring(1, 0);
+    var texto = mask.substring(i)
+    if (texto.substring(0, 1) != saida) {
+        t.value += texto.substring(0, 1);
+    }
+}

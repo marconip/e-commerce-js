@@ -4,14 +4,14 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
+    <link rel="icon" type="image/ico" href="img/favicon.ico" />
     <link rel="stylesheet" href="css/style.min.css">
 
     <title>E-commerce JS</title>
 </head>
 
 <body>
-    <section class="loja">
+    <section class="loja anime-aparecer">
         <div class="loja-titulo">
             <i class="icone-cart"></i>
             <h2> Store</h2>
@@ -22,37 +22,37 @@
                 <img src="img/senhor-aneis.jpg" alt="Lord of the Rigns">
                 <h3>Lord of the Rigns</h3>
                 <p>R$ <span>50,00</span></p>
-                <button type="button" class="btn btn-buy"><i class="icone-cart"></i> Buy</button>
+                <button type="button" class="btn btn-buy"><i class="icone-cart"></i> o Cart</button>
             </div>
             <div class="product" data-target="misery">
                 <img src="img/misery.jpg" alt="Misery">
                 <h3>Misery</h3>
                 <p>R$ <span>30,90</span></p>
-                <button type="button" class="btn btn-buy"><i class="icone-cart"></i> Buy</button>
+                <button type="button" class="btn btn-buy"><i class="icone-cart"></i> Add to Cart</button>
             </div>
             <div class="product" data-target="sapiens">
                 <img src="img/sapiens.jpg" alt="Sapiens">
                 <h3>Sapiens</h3>
                 <p>R$ <span>40,99</span></p>
-                <button type="button" class="btn btn-buy"><i class="icone-cart"></i> Buy</button>
+                <button type="button" class="btn btn-buy"><i class="icone-cart"></i> Add to Cart</button>
             </div>
             <div class="product" data-target="spider-man">
                 <img src="img/spider-man.jpg" alt="Spider-man">
                 <h3>The Amazing Spider-man</h3>
                 <p>R$ <span>20,00</span></p>
-                <button type="button" class="btn btn-buy"><i class="icone-cart"></i> Buy</button>
+                <button type="button" class="btn btn-buy"><i class="icone-cart"></i> Add to Cart</button>
             </div>
             <div class="product" data-target="avangers-vs-xmen">
                 <img src="img/avangers-vs-xmen.jpg" alt="Avangers vs X-men">
                 <h3>Avangers vs X-men</h3>
                 <p>R$ <span>100,9</span>0</p>
-                <button type="button" class="btn btn-buy"><i class="icone-cart"></i> Buy</button>
+                <button type="button" class="btn btn-buy"><i class="icone-cart"></i> Add to Cart</button>
             </div>
             <div class="product" data-target="conan">
                 <img src="img/conan.jpg" alt="Conan">
                 <h3>Conan</h3>
                 <p>R$ <span>10,00</span></p>
-                <button type="button" class="btn btn-buy"><i class="icone-cart"></i> Buy</button>
+                <button type="button" class="btn btn-buy"><i class="icone-cart"></i> Add to Cart</button>
             </div>
         </div>
     </section>
@@ -84,7 +84,8 @@
                     <p class="shipping-free d-none"><i class="icone-like"></i> Your orders are free shipping</p>
                 </div>
                 <div class="zipcode">
-                    <input type="text" name="zipcode" pattern="[0-9]*" inputmode="numeric">
+                    <input type="text" name="zipcode" onkeypress="mascara(this, '#####-###')" maxlength="9"
+                        pattern="[0-9]*" inputmode="numeric">
                     <button type="button" class="btn btn-ok"> OK </button>
                     <a href="javascript:void(0)">Don't know my zip code</a>
                 </div>
@@ -122,21 +123,21 @@
                     <p>
                         <strong>Total</strong> <strong class="resume-total"> </strong>
                     </p>
-                    <button type="button" class="btn btn-ok">Checkout</button>
+                    <button type="button" class="btn btn-checkout">Checkout</button>
                 </div>
             </div>
         </div>
     </section>
 
-    <div class="modal" style="display: none;">
+    <div class="modal anime-aparecer d-none">
         <div class="modal-main">
             <div class="modal-body">
                 <h2>Checkout<br />
                     will restart the page</h2>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn"> Finish </button>
-                <button type="button" class="btn btn-line"> Back </button>
+                <button type="reset" class="btn" onclick="location.reload()"> Finish </button>
+                <button type="button" class="btn btn-line" onclick="document.querySelector('.modal').classList.add('d-none')"> Back </button>
             </div>
         </div>
     </div>

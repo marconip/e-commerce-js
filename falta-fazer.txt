@@ -1,5 +1,3 @@
-icone na aba do navegador
-
-fazer o btn = CHECKOUT com modal
+$ 100,900 (ver com Kalebe) - quando quantidade fica a mais
 
 responsivo html

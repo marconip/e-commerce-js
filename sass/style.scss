@@ -81,6 +81,7 @@ button {
     border: 0px;
     border-radius: 5px;
     background-color: $cor-primaria;
+    outline: none;
 
     &:hover {
         background-color: darken($cor-primaria, 10%);
@@ -107,8 +108,10 @@ input {
     padding: 8px;
     border-radius: 5px;
     border: 1px solid $cinza-claro;
+    outline: none;
 
-    &:hover {
+    &:hover,
+    &:focus {
         border-color: $cinza-7;
     }
 }
@@ -364,12 +367,18 @@ section {
             flex: auto;
             flex-direction: column;
             justify-content: space-between;
-            height: 160px;
+            height: 150px;
             margin-left: 15px;
 
+            p {
+                font-size: $s13;
+                color: $cinza-7;
+                position: relative;
+                top: 10px;
+            }
+
             input {
-                max-width: 55px;
-                margin: 10px 0;
+                max-width: 60px;
             }
 
             a {
@@ -463,6 +472,14 @@ section {
             height: 0px;
             margin-bottom: 0px;
         }
+
+        &.erro {
+            color: red;
+
+            .checkmark {
+                border-color: red;
+            }
+        }
     }
 
     .zipcode-numbers {
@@ -508,15 +525,15 @@ section {
 }
 
 .modal {
-    width: 100%;
-    height: 100%;
-    align-items: center;
     display: flex;
     justify-content: center;
+    width: 100%;
+    height: 100%;
     position: fixed;
     top: 0;
     left: 0;
     z-index: 9;
+    align-items: center;
     background-color: rgba(black, .9);
 
     .modal-main {
