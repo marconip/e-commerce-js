@@ -1,16 +1,3 @@
-Number.prototype.FormatarReal = function () {
-    var numero = undefined;
-    numero = this.toString().split('.');
-    if (numero[1] == undefined)
-        numero[1] = "00";
-    else if (numero[1].length == 1)
-        numero[1] = numero[1] + "0";
-
-    numero[0] = numero[0].split(/(?=(?:...)*$)/).join('.');
-    numero[1] = numero[1].substring(0, 2);
-    return numero.join(',');
-}
-
 //mostrar e esconder a loja
 var lojaTitulo = document.querySelector(".loja-titulo");
 lojaTitulo.onclick = function () {
@@ -159,7 +146,7 @@ function inputQdt(input) {
 
     valorItensTotal += (parseFloat(valor.dataset.price.replace(",", ".")) * parseInt(qtd.value));//parseFloat: pega 1ponto de dezena - parseInt: numeros inteiros sem fração
 
-    input.parentElement.nextElementSibling.children[0].innerHTML = valorItensTotal.FormatarReal();
+    input.parentElement.nextElementSibling.children[0].innerHTML = valorItensTotal.toFixed(2).toString().replace(".", ",");
 
     if (qtd.value == 0) {
         qtd.nextElementSibling.click();
@@ -196,14 +183,14 @@ function resumoTotal() {
         var tiposFreteTodos = document.querySelector(".zipcode-choices");
         var tiposFrete = document.querySelectorAll(".zipcode-choices .radios");
 
-        valorResumo += (parseFloat(valor.innerHTML.replace(/[.]*/g, "").replace(",", ".")));
-        document.querySelector(".resume-value span").innerHTML = valorResumo.FormatarReal();
-        document.querySelector(".resume-total").innerHTML = valorResumo.FormatarReal();
+        valorResumo += (parseFloat(valor.innerHTML.replace(",", ".")));
+        document.querySelector(".resume-value span").innerHTML = valorResumo.toFixed(2).toString().replace(".", ",");
+        document.querySelector(".resume-total").innerHTML = valorResumo.toFixed(2).toString().replace(".", ",");
 
         //texto para frete grátis       
         var paraGratis = 0;
         //obs.: 'parseFloat' converte uma string em valores numericos
-        if (parseFloat(valorTodosItens.innerHTML.replace(/[.]*/g, "").replace(",", ".")) >= parseFloat(valorFreteApartir.innerHTML.replace(",", "."))) {
+        if (parseFloat(valorTodosItens.innerHTML.replace(",", ".")) >= parseFloat(valorFreteApartir.innerHTML.replace(",", "."))) {
             txtFreteAdd.classList.add("d-none");//remove texto valor faltante
             resumoFrete.classList.add("autoselecionado");//coloca cor verde Resumo Total do frete 
             resumoFrete.classList.remove("d-none");//mostra no Resumo Total o valor frete
@@ -230,8 +217,8 @@ function resumoTotal() {
             tiposFrete[2].classList.remove("autoselecionado");
             tiposFrete[2].children[0].checked = false;
         }
-        paraGratis += (parseFloat(valorFreteApartir.innerHTML.replace(",", ".")) - parseFloat(valorTodosItens.innerHTML.replace(/[.]*/g, "").replace(",", ".")));
-        document.querySelector(".shipping-add span").innerHTML = paraGratis.FormatarReal();
+        paraGratis += (parseFloat(valorFreteApartir.innerHTML.replace(",", ".")) - parseFloat(valorTodosItens.innerHTML.replace(",", ".")));
+        document.querySelector(".shipping-add span").innerHTML = paraGratis.toFixed(2).toString().replace(".", ",");
 
         //soma valores total
         var cepSelecionado = document.querySelector(".radios input:checked");
@@ -243,8 +230,8 @@ function resumoTotal() {
             valorTotalFrete.innerHTML = cepSelecionado.value;
 
             //mostra Total (soma todos itens + frete)
-            valorTotal += (parseFloat(valorTodosItens.innerHTML.replace(/[.]*/g, "").replace(",", ".")) + parseFloat(valorTotalFrete.innerHTML.replace(",", ".")));
-            document.querySelector(".resume-total").innerHTML = "R$ " + valorTotal.FormatarReal();
+            valorTotal += (parseFloat(valorTodosItens.innerHTML.replace(",", ".")) + parseFloat(valorTotalFrete.innerHTML.replace(",", ".")));
+            document.querySelector(".resume-total").innerHTML = "R$ " + valorTotal.toFixed(2).toString().replace(".", ",");
         };
 
         //itens total por input quantidade
