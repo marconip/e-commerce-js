@@ -91,10 +91,10 @@
                     <input type="text" name="zipcode" onkeypress="mascara(this, '#####-###')" maxlength="9"
                         pattern="[0-9]*" inputmode="numeric">
                     <button type="button" class="btn btn-ok"> OK </button>
-                    <a href="javascript:void(0)">Don't know my zip code</a>
+                    <a href="javascript:void(0)">Find zip code</a>
                 </div>
                 <div class="zipcode-choices hide">
-                    <label class="radios">Conventional - 14 days
+                    <label class="radios">Formal - 14 days
                         <input type="radio" name="radio" value="10,00" class="sedex">
                         <span class="checkmark"></span>
                         <div class="zipcode-price">R$ 10,00</div>
@@ -140,8 +140,8 @@
                     will restart the page</h2>
             </div>
             <div class="modal-footer">
-                <button type="reset" class="btn" onclick="location.reload()"> Finish </button>
                 <button type="button" class="btn btn-line" onclick="document.querySelector('.modal').classList.add('d-none')"> Back </button>
+                <button type="reset" class="btn" onclick="location.reload()"> Finish </button>
             </div>
         </div>
     </div>

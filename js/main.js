@@ -110,7 +110,6 @@ cepBotao.onclick = function () {
         cep.classList.add("erro");
         cepEscolhas.classList.add("hide");
         cepNumeros.classList.remove("hide");
-        document.querySelector(".resume-shipping").classList.add("d-none");
     }
 };
 //click no texto "não sei meu cep"

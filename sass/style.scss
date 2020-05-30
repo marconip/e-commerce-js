@@ -1,45 +1,8 @@
 @charset "UTF-8";
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700;800&display=swap');
 
-//Cores
-$cinza-1: #111111 !default;
-$cinza-2: #222222 !default;
-$cinza-3: #333333 !default;
-$cinza-4: #444444 !default;
-$cinza: #555555 !default;
-$cinza-6: #666666 !default;
-$cinza-7: #777777 !default;
-$cinza-8: #888888 !default;
-$cinza-9: #999999 !default;
-$cinza-claro: #cccccc !default;
-
-$cor-primaria: #04AF0F;
-
-//Medias px em rem
-$s1: 0.063rem;
-$s2: 0.125rem;
-$s3: 0.188rem;
-$s4: 0.25rem;
-$s5: 0.313rem;
-$s10: 0.625rem;
-$s11: 0.6875rem;
-$s12: 0.75rem;
-$s13: 0.8125rem;
-$s14: 0.875rem;
-$s15: 0.9375rem;
-$s16: 1rem;
-$s17: 1.0625rem;
-$s18: 1.125rem;
-$s19: 1.1875rem;
-$s20: 1.25rem;
-$s25: 1.5625rem;
-$s30: 1.875rem;
-$s35: 2.1875rem;
-$s40: 2.5rem;
-$s45: 2.8125rem;
-$s50: 3.125rem;
-//Se precisar de mais numero é só somar
-//ex. SCSS: font-size: $s50 * 2; CSS font-size: 6.25rem (=100px)
+@import "_media.scss";
+@import "_variables.scss";
 
 body {
     font-family: 'Open Sans', sans-serif;
@@ -56,6 +19,10 @@ h5,
 p {
     margin: 0px;
     font-weight: 600;
+}
+
+h3 {
+    font-size: $s20;
 }
 
 a {
@@ -88,15 +55,15 @@ button {
         cursor: pointer;
     }
 
-    .btn-line {
-        color: $cor-primaria;
-        border: 1px solid $cor-primaria;
-        background-color: white;
+    &.btn-line {
+        color: $cinza-7;
+        border: 1px solid $cinza-7;
+        background-color: transparent;
 
         &:hover {
             color: white;
-            border: 1px solid $cor-primaria;
-            background-color: $cor-primaria;
+            border-color: $cinza-7;
+            background-color: $cinza-7;
         }
     }
 }
@@ -222,6 +189,20 @@ section {
     width: 100%;
     max-width: 1140px;
     margin: 0 auto;
+
+    @include media(lg) {
+        max-width: 960px;
+    }
+
+    @include media(md) {
+        max-width: 720px;
+    }
+
+    @include media(sm-abaixo) {
+        width: 90%;
+        max-width: 540px;
+        padding: 0 15px;
+    }
 }
 
 .loja-titulo {
@@ -256,21 +237,57 @@ section {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-bottom: 40px;
     height: 0px;
-    overflow: hidden;
+    margin: 0 auto 40px auto;
+    overflow: auto hidden;
     transition: .25s;
 
+    @include media(sm-abaixo) {
+        flex-direction: column;
+    }
+
     &.show {
-        height: 360px;
+        height: 375px;
+
+        @include media(sm-abaixo) {
+            height: auto;
+        }
+    }
+
+    //barra movel tamanho 
+    &::-webkit-scrollbar {
+        height: 0.5rem;
+    }
+
+    //caminho/fundo da barra
+    &::-webkit-scrollbar-track {
+        background: $cinza-claro;
+    }
+
+    //barra movel
+    &::-webkit-scrollbar-thumb {
+        border-radius: 50px;
+        background: $cinza-9;
+    }
+
+    //barra movel hover 
+    &::-webkit-scrollbar-thumb:hover {
+        background: $cinza-7;
     }
 
     .product {
         width: 160px;
+        min-width: 160px;
         border-radius: 5px;
         padding: 5px;
+        margin: 0rem 0.3rem;
         transition: .50s;
         border: 1px solid white;
+
+        @include media(sm-abaixo) {
+            width: 62%;
+            margin: 0rem 0rem 1.5rem 0rem;
+        }
 
         &:hover {
             border-color: $cor-primaria;
@@ -282,6 +299,12 @@ section {
             min-height: 244px;
             max-height: 244px;
             outline: 1px solid $cinza-claro;
+
+            @include media(sm-abaixo) {
+                max-width: 100%;
+                min-height: auto;
+                max-height: inherit;
+            }
         }
 
         h3 {
@@ -289,6 +312,10 @@ section {
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
+
+            @include media(sm-abaixo) {
+                white-space: normal;
+            }
         }
 
         p {
@@ -335,10 +362,18 @@ section {
 .cart-items {
     display: flex;
     justify-content: space-between;
+
+    @include media(sm-abaixo) {
+        flex-direction: column;
+    }
 }
 
 .bag {
-    width: 62%;
+    width: 60%;
+
+    @include media(sm-abaixo) {
+        width: 100%;
+    }
 
     .titles {
         display: flex;
@@ -374,7 +409,7 @@ section {
                 font-size: $s13;
                 color: $cinza-7;
                 position: relative;
-                top: 10px;
+                top: 8px;
             }
 
             input {
@@ -393,16 +428,27 @@ section {
 
         p {
             color: $cinza-2;
+
+            @include media(sm-abaixo) {
+                display: contents;
+            }
         }
     }
 }
 
 .values {
-    width: 29%;
+    width: 32%;
     font-size: 16px;
     border: 1px solid #ccc;
     border-radius: 5px;
     padding: 15px;
+
+    @include media(sm-abaixo) {
+        width: 100%;
+        padding: 0;
+        border: 0;
+        margin-top: 30px;
+    }
 
     [class*="shipping-"] {
         font-size: $s14;
@@ -430,6 +476,11 @@ section {
         align-items: center;
         margin: 20px 0;
 
+        @include media(md-abaixo) {
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
         &.erro {
             input {
                 border-color: red;
@@ -442,11 +493,20 @@ section {
 
         input {
             max-width: 100px;
+
+            @include media(md-abaixo) {
+                max-width: 92%;
+            }
         }
 
         button {
             max-width: 50px;
             margin: 0 15px;
+
+            @include media(md-abaixo) {
+                max-width: 100%;
+                margin: 10px 0;
+            }
         }
 
         label {
@@ -458,10 +518,14 @@ section {
     .zipcode-choices {
         display: flex;
         flex-direction: column;
-        height: 102px;
+        height: 105px;
         overflow: hidden;
         margin-bottom: 15px;
         transition: .40s;
+
+        @include media(md-abaixo) {
+            font-size: $s16;
+        }
 
         [class*="zipcode-choice"] {
             display: flex;
@@ -539,7 +603,7 @@ section {
     .modal-main {
         width: 300px;
         text-align: center;
-        padding: 20px;
+        padding: 15px;
         border-radius: 5px;
         background-color: white;
 

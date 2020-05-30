@@ -1,0 +1,73 @@
+@mixin media($medias...) {
+	@each $media in $medias {
+		/////////////TAMANHO DE TELA FORNECIDA OU MAIOR
+		// Dispositivos small (telefones em modo paisagem, com 576px ou mais)
+		@if $media == sm-acima {
+			@media (min-width: $m576) {
+				@content;
+			}
+		}
+		// Dispositivos medios (tablets com 768px ou mais)
+		@if $media == md-acima {
+			@media (min-width: $m768) {
+				@content;
+			}
+		}
+		// Dispositivos large (desktops com 992px ou mais)
+		@if $media == lg-acima {
+			@media (min-width: $m992) {
+				@content;
+			}
+		}
+		// Dispositivos extra large (desktops grandes com 1200px ou mais)
+		@if $media == xl-acima {
+			@media (min-width: $m1200) {
+				@content;
+			}
+		}
+		/////////////TAMANHO DE TELA FORNECIDA OU MENOR
+		// Dispositivos extra small (telefones em modo retrato, com menos de 576px)
+		@if $media == xs-abaixo {
+			@media (max-width: $m575) {
+				@content;
+			}
+		}
+		// Dispositivos small (telefones em modo paisagem, com menos de 768px)
+		@if $media == sm-abaixo {
+			@media (max-width: $m767) {
+				@content;
+			}
+		}
+		// Dispositivos medios (tablets com menos de 992px)
+		@if $media == md-abaixo {
+			@media (max-width: $m991) {
+				@content;
+			}
+		}
+		// Dispositivos large (desktops com menos de 1200px)
+		@if $media == lg-abaixo {
+			@media (max-width: $m1199) {
+				@content;
+			}
+		}
+		/////////////TAMANHO DE TELA ENTRE O TAMANHO MIN�MO E MAXIMO
+		// Dispositivos small (telefones em modo paisagem, com 576px ou mais)
+		@if $media == sm {
+			@media (min-width: $m576) and (max-width: $m767) {
+				@content;
+			}
+		}
+		// Dispositivos m�dios (tablets com 768px ou mais)
+		@if $media == md {
+			@media (min-width: $m768) and (max-width: $m991) {
+				@content;
+			}
+		}
+		// Dispositivos large (desktops com 992px ou mais)
+		@if $media == lg {
+			@media (min-width: $m992) and (max-width: $m1199) {
+				@content;
+			}
+		}
+	}
+}

@@ -1,0 +1,42 @@
+//Cores
+$cinza-2: #222222 !default;
+$cinza-7: #777777 !default;
+$cinza-9: #999999 !default;
+$cinza-claro: #cccccc !default;
+$cor-primaria: #04AF0F;
+
+//Responsive breakpoints
+$m575: 575.98px;
+$m576: 576px;
+$m767: 767.98px;
+$m768: 768px;
+$m991: 991.98px;
+$m992: 992px;
+$m1199: 1199.98px;
+$m1200: 1200px;
+
+//Medias px em rem
+$s1: 0.063rem;
+$s2: 0.125rem;
+$s3: 0.188rem;
+$s4: 0.25rem;
+$s5: 0.313rem;
+$s10: 0.625rem;
+$s11: 0.6875rem;
+$s12: 0.75rem;
+$s13: 0.8125rem;
+$s14: 0.875rem;
+$s15: 0.9375rem;
+$s16: 1rem;
+$s17: 1.0625rem;
+$s18: 1.125rem;
+$s19: 1.1875rem;
+$s20: 1.25rem;
+$s25: 1.5625rem;
+$s30: 1.875rem;
+$s35: 2.1875rem;
+$s40: 2.5rem;
+$s45: 2.8125rem;
+$s50: 3.125rem;
+//Se precisar de mais numero é só somar
+//ex. SCSS: font-size: $s50 * 2; CSS font-size: 6.25rem (=100px)
