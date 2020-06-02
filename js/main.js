@@ -142,6 +142,7 @@ function excluir() {
                 cep.classList.remove("erro");
                 cepEscolhas.classList.add("hide");
                 cepNumeros.classList.add("hide");
+                document.querySelector(".radios input:checked").checked = false;
             };
 
             resumoTotal();
@@ -203,6 +204,8 @@ function resumoTotal() {
         var paraGratis = 0;
         //obs.: 'parseFloat' converte uma string em valores numericos
         if (parseFloat(valorTodosItens.innerHTML.replace(/[.]*/g, "").replace(",", ".")) >= parseFloat(valorFreteApartir.innerHTML.replace(",", "."))) {
+            cep.classList.remove("erro");//remover cor vermelha campo cep
+            cepNumeros.classList.add("hide");//esconde as opões de cep
             txtFreteAdd.classList.add("d-none");//remove texto valor faltante
             resumoFrete.classList.add("autoselecionado");//coloca cor verde Resumo Total do frete 
             resumoFrete.classList.remove("d-none");//mostra no Resumo Total o valor frete
@@ -264,13 +267,24 @@ var resumoFrete = document.querySelector(".resume-shipping");
 var modal = document.querySelector(".modal");
 
 btnCheckout.onclick = function () {
-    if (resumoFrete.classList.contains("d-none")) {
+    if (cepInput.value == "73073-073" || cepInput.value == "83083-083" || cepInput.value == "93093-093") {
+
         cepEscolhas.classList.remove("hide");
-        cepEscolhas.classList.add("erro");
+        cepNumeros.classList.add("hide");
+
+        if (resumoFrete.classList.contains("d-none") && cepEscolhas.classList.contains("hide")) {
+            cep.classList.add("erro");
+            cepNaoSei.click();
+        } else if (resumoFrete.classList.contains("d-none")) {
+            cepEscolhas.classList.add("erro");
+        } else {
+            modal.classList.remove("d-none");
+        };
     } else {
-        modal.classList.remove("d-none");
+        cep.classList.add("erro");
+        cepNaoSei.click();
     }
-}
+};
 
 
 //mascara cep

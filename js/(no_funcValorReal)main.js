@@ -251,13 +251,24 @@ var resumoFrete = document.querySelector(".resume-shipping");
 var modal = document.querySelector(".modal");
 
 btnCheckout.onclick = function () {
-    if (resumoFrete.classList.contains("d-none")) {
+    if (cepInput.value == "73073-073" || cepInput.value == "83083-083" || cepInput.value == "93093-093") {
+
         cepEscolhas.classList.remove("hide");
-        cepEscolhas.classList.add("erro");
+        cepNumeros.classList.add("hide");
+
+        if (resumoFrete.classList.contains("d-none") && cepEscolhas.classList.contains("hide")) {
+            cep.classList.add("erro");
+            cepNaoSei.click();
+        } else if (resumoFrete.classList.contains("d-none")) {
+            cepEscolhas.classList.add("erro");
+        } else {
+            modal.classList.remove("d-none");
+        };
     } else {
-        modal.classList.remove("d-none");
+        cep.classList.add("erro");
+        cepNaoSei.click();
     }
-}
+};
 
 
 //mascara cep
