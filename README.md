@@ -9,6 +9,8 @@ You can download this project and remove the file who you want to practice, exam
 <strong>How it works</strong><br/>
 You can simulate a purchase with free shipping or without free shipping, by entering zip code and increasing the item numbers. You can make your own currency, in this case it is the "real" currency of Brazil.
 
+Developed by me (Marconip) and a good help in javascript by <a href="https://github.com/KalebeMatos">Kalebe Matos</a>
+
 <b>Screenshots</b>
 ![screenshots](https://raw.githubusercontent.com/marconip/e-commerce-js/master/img/desktop-free-shipping.png)
 
